@@ -1,0 +1,14 @@
+diff -Naur filefield-orig/filefield_field.inc filefield/filefield_field.inc
+--- filefield_field.inc	2011-05-22 15:23:57.000000000 +0100
++++ filefield_field.inc	2011-05-22 15:24:34.000000000 +0100
+@@ -291,7 +291,9 @@
+     }
+
+     // Add nid so formatters can create a link to the node.
+-    $items[$delta]['nid'] = $node->nid;
++    if (is_object($node) && !empty($node->nid)) {
++      $items[$delta]['nid'] = $node->nid;
++    }
+
+     // Get the 'data' column stored by CCK into an array. This is necessary
+     // for Views, which doesn't call the "load" $op and to fix an issue with
